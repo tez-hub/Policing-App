@@ -3,16 +3,18 @@ import {Text, View, Image, ImageBackground} from 'react-native'
 import {TouchableOpacity} from 'react-native-gesture-handler'
 import Icon from '@expo/vector-icons/Entypo'
 
-export default class Post extends React.Component{
-    state={
-        liked:false
-    }
-    onLike=()=> {
-        this.setState({liked:this.state.liked})
-    }
-    render(){
+// export default class Post extends React.Component{
 
-        const {name, profile, photo, onPress} = this.props
+const Post = (props) => {
+    // state={
+    //     liked:false
+    // }
+    // onLike=()=> {
+    //     this.setState({liked:this.state.liked})
+    // }
+    // render(){
+
+        // const {name, profile, photo, onPress} = props
         return (
             <View>
                 <View style={{
@@ -22,7 +24,7 @@ export default class Post extends React.Component{
                 }}>
                     <View style={{width:'20%'}}>
                         <Image
-                            source={{profile}}
+                            source={props.profile}
                             style={{
                                 width: 45,
                                 height: 45,
@@ -35,13 +37,15 @@ export default class Post extends React.Component{
                     }}>
                         <Text style={{
                             fontSize: 14,
-                            color: '#044244'
-                        }}>{name}</Text>
+                            color: '#044244',
+                            marginLeft: 20
+                        }}>{props.name}</Text>
                         <Text style={{
                             fontSize: 12,
-                            color: '#9ca1a2'
+                            color: '#9ca1a2',
+                            marginLeft: 20
                         }}>
-                            2 mins
+                            3 hrs
                         </Text>
 
                     </View>
@@ -64,7 +68,7 @@ export default class Post extends React.Component{
                     paddingTop:20
                 }}>
                     <ImageBackground
-                        source={photo}
+                        source={props.photo}
                         style={{
                             width:'100%',
                             height:220
@@ -95,8 +99,10 @@ export default class Post extends React.Component{
                                 />
 
                             </TouchableOpacity> */}
+
+
                             <TouchableOpacity
-                                onPress={this.onLike}
+                                // onPress={this.onLike}
                                 style={{
                                     marginBottom: 20,
                                     borderRadius: 5,
@@ -106,11 +112,11 @@ export default class Post extends React.Component{
                                     marginRight: 20
                                 }}
                             >
-                                <Icon
+                                {/* <Icon
                                     name= {this.state.liked === true ? "heart": "heart-outlined"}
                                     color={this.state.liked===true ? "red":'#044244'}
                                     size={20}
-                                />
+                                /> */}
                                 
 
                             </TouchableOpacity>
@@ -123,7 +129,7 @@ export default class Post extends React.Component{
                 
             </View>
         )
-    }
+    
 }
 
-
+export default Post;

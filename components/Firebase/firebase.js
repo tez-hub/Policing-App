@@ -1,5 +1,6 @@
 import * as firebase from 'firebase';
 import 'firebase/auth';
+import 'firebase/firestore';
 
 import firebaseConfig from './firebaseConfig';
 
@@ -8,6 +9,8 @@ import firebaseConfig from './firebaseConfig';
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 }
+
+// const firebaseApp = firebase.initializeApp(firebaseConfig);
 
 export const auth = firebase.auth();
 
@@ -20,3 +23,7 @@ export const registerWithEmail = (email, password) =>
 export const logout = () => auth.signOut();
 
 export const passwordReset = email => auth.sendPasswordResetEmail(email);
+
+const db = firebase.firestore();
+
+export default db;

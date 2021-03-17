@@ -40,7 +40,8 @@ const ChatScreen = () => {
                         name="send-circle"
                         size={32}
                         color='#2e64e5'
-                        style={{marginBottom: 5, marginRight:5}} />
+                        style={{marginBottom: 5, marginRight:5}}
+                    />
                 </View>
             </Send>
         )

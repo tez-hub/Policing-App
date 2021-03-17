@@ -1,11 +1,55 @@
-import React, {useState} from 'react'
-import {Text, View, Input, Image, ImageBackground, TouchableOpacity} from 'react-native'
+import React, {useState, useEffect} from 'react'
+import {Text, View, Input, Image, ImageBackground, TouchableOpacity, Alert, Platform} from 'react-native'
 import {ScrollView, TextInput} from 'react-native-gesture-handler'
-import Icon from '@expo/vector-icons/Entypo'
+import Icon from '@expo/vector-icons/Entypo';
 import { AntDesign } from '@expo/vector-icons'; 
-import Post from './Post'
+import Post from './Post';
+import * as ImagePicker from 'expo-image-picker';
+import * as firebase from 'firebase';
+import Constants from 'expo-constants';
+// import firestore from 'firebase/firestore';
+import db from '../components/Firebase/firebase'
 
 const ProfileScreen = () => {
+    // const [photo, setPhoto] = useState(null);
+    // const [posts, setPosts] = useState([]);
+
+    // useEffect(() => {
+    //     db.collection('posts').get().then(snapshot => (
+    //         setPosts(snapshot.map((doc) => doc.data()))
+    //     ))
+    // }, []);
+    
+
+    // useEffect(() => {
+    //     (async () => {
+    //     if (Platform.OS !== 'web') {
+    //         const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    //         if (status !== 'granted') {
+    //         alert('Sorry, we need camera roll permissions to make this work!');
+    //         }
+    //     }
+    //     })();
+    // }, []);
+
+
+    const pickImage = async () => {
+            let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1,
+        });
+
+        console.log(result);
+
+        if (!result.cancelled) {
+        setPhoto(result.uri);
+        }
+
+
+    };
+ 
     
     return (
         <ScrollView
@@ -65,8 +109,11 @@ const ProfileScreen = () => {
                             style={{
                                 marginLeft: 20,
                             }}
+                            onPress={pickImage}
                         />
+                        
                     </View>
+                
 
                 </View>
             </View>
@@ -101,8 +148,10 @@ const ProfileScreen = () => {
                     <Post
                         name = 'Tez KE'
                         profile={require('../assets/picpost.jpg')}
-                        photo={require('../assets/picpost.jpg')}
+                        photo = {require('../assets/accident.jpg')}
+                        //  style={{ width: 200, height: 200 }} />}
                     />
+
                     <View style={{
                         height:160,
                         backgroundColor: '#3c636c',
@@ -117,13 +166,34 @@ const ProfileScreen = () => {
                     
 
                 </View>
-                <Text style={{
-                    fontSize: 15,
-                    marginTop: 10
-                }}>This is just a random text which should not actually be here but, it is.</Text>
+                
+                <View style={{
+                    flexDirection: 'row'
+                }}>
+                    <Post
+                        name = 'Tez KE'
+                        profile={require('../assets/picpost.jpg')}
+                        photo = {require('../assets/armed-robbers.jpg')}
+                        //  style={{ width: 200, height: 200 }} />}
+                    />
 
+                    <View style={{
+                        height:160,
+                        backgroundColor: '#3c636c',
+                        width: 20,
+                        marginLeft: 20,
+                        marginTop: 120,
+                        borderTopLeftRadius: 20,
+                        borderBottomLeftRadius: 20
+                    }}>
+
+                    </View>
+                    
+
+                </View>
+                
             </View>
-
+          
         </ScrollView>
         
     )
